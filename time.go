@@ -86,15 +86,14 @@ func (dur Duration) string(units uint8) string {
 
 		if amount > 0 {
 			segments = append(segments, strconv.FormatInt(int64(amount), 10)+unit.unit)
+			units--
 		}
-
-		units--
 	}
 
 	result := strings.Join(segments, " ")
 
 	if negative {
-		result = "-" + result;
+		result = "-" + result
 	}
 
 	return result
