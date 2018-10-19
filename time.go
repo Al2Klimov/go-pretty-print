@@ -40,15 +40,13 @@ func (dur Duration) Format(f fmt.State, c rune) {
 		}
 
 		fmt.Fprint(f, dur.floatString(byte(c), prec))
-	case 's':
+	case 's', 'v':
 		prec, hasPrec := f.Precision()
 		if !hasPrec {
 			prec = 1
 		}
 
 		fmt.Fprint(f, dur.string(uint8(prec+1)))
-	case 'v':
-		fmt.Fprintf(f, "go_pretty_print.Duration(%v)", time.Duration(dur))
 	default:
 		fmt.Fprintf(f, "%%!%c(go_pretty_print.Duration=%s)", c, time.Duration(dur))
 	}

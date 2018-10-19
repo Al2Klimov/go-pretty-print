@@ -102,12 +102,13 @@ func TestDuration_Format_0(t *testing.T) {
 	assertDuration_Format(t, 0, "%G", "0")
 	assertDuration_Format(t, 0, "%.2G", "0")
 
-	assertDuration_Format(t, 0, "%s", "0s")
-	assertDuration_Format(t, 0, "%.0s", "0s")
-	assertDuration_Format(t, 0, "%.7s", "0s")
-	assertDuration_Format(t, 0, "%.128s", "0s")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, 0, "%"+c, "0s")
+		assertDuration_Format(t, 0, "%.0"+c, "0s")
+		assertDuration_Format(t, 0, "%.7"+c, "0s")
+		assertDuration_Format(t, 0, "%.128"+c, "0s")
+	}
 
-	assertDuration_Format(t, 0, "%v", "go_pretty_print.Duration(0s)")
 	assertDuration_Format(t, 0, "%d", "%!d(go_pretty_print.Duration=0s)")
 }
 
@@ -125,12 +126,13 @@ func TestDuration_Format_NS(t *testing.T) {
 	assertDuration_Format(t, ns8, "%G", "8E-09")
 	assertDuration_Format(t, ns8, "%.2G", "8E-09")
 
-	assertDuration_Format(t, ns8, "%s", "8ns")
-	assertDuration_Format(t, ns8, "%.0s", "8ns")
-	assertDuration_Format(t, ns8, "%.7s", "8ns")
-	assertDuration_Format(t, ns8, "%.128s", "8ns")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, ns8, "%"+c, "8ns")
+		assertDuration_Format(t, ns8, "%.0"+c, "8ns")
+		assertDuration_Format(t, ns8, "%.7"+c, "8ns")
+		assertDuration_Format(t, ns8, "%.128"+c, "8ns")
+	}
 
-	assertDuration_Format(t, ns8, "%v", "go_pretty_print.Duration(8ns)")
 	assertDuration_Format(t, ns8, "%d", "%!d(go_pretty_print.Duration=8ns)")
 
 	assertDuration_Format(t, -ns8, "%b", "-4835703278458517p-79")
@@ -146,12 +148,13 @@ func TestDuration_Format_NS(t *testing.T) {
 	assertDuration_Format(t, -ns8, "%G", "-8E-09")
 	assertDuration_Format(t, -ns8, "%.2G", "-8E-09")
 
-	assertDuration_Format(t, -ns8, "%s", "-8ns")
-	assertDuration_Format(t, -ns8, "%.0s", "-8ns")
-	assertDuration_Format(t, -ns8, "%.7s", "-8ns")
-	assertDuration_Format(t, -ns8, "%.128s", "-8ns")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -ns8, "%"+c, "-8ns")
+		assertDuration_Format(t, -ns8, "%.0"+c, "-8ns")
+		assertDuration_Format(t, -ns8, "%.7"+c, "-8ns")
+		assertDuration_Format(t, -ns8, "%.128"+c, "-8ns")
+	}
 
-	assertDuration_Format(t, -ns8, "%v", "go_pretty_print.Duration(-8ns)")
 	assertDuration_Format(t, -ns8, "%d", "%!d(go_pretty_print.Duration=-8ns)")
 }
 
@@ -169,18 +172,19 @@ func TestDuration_Format_US(t *testing.T) {
 	assertDuration_Format(t, us7, "%G", "7E-06")
 	assertDuration_Format(t, us7, "%.2G", "7E-06")
 
-	assertDuration_Format(t, us7, "%s", "7us")
-	assertDuration_Format(t, us7, "%.0s", "7us")
-	assertDuration_Format(t, us7, "%.7s", "7us")
-	assertDuration_Format(t, us7, "%.128s", "7us")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, us7, "%"+c, "7us")
+		assertDuration_Format(t, us7, "%.0"+c, "7us")
+		assertDuration_Format(t, us7, "%.7"+c, "7us")
+		assertDuration_Format(t, us7, "%.128"+c, "7us")
 
-	assertDuration_Format(t, us7+ns8, "%s", "7us 8ns")
-	assertDuration_Format(t, us7+ns8, "%.0s", "7us")
-	assertDuration_Format(t, us7+ns8, "%.1s", "7us 8ns")
-	assertDuration_Format(t, us7+ns8, "%.7s", "7us 8ns")
-	assertDuration_Format(t, us7+ns8, "%.128s", "7us 8ns")
+		assertDuration_Format(t, us7+ns8, "%"+c, "7us 8ns")
+		assertDuration_Format(t, us7+ns8, "%.0"+c, "7us")
+		assertDuration_Format(t, us7+ns8, "%.1"+c, "7us 8ns")
+		assertDuration_Format(t, us7+ns8, "%.7"+c, "7us 8ns")
+		assertDuration_Format(t, us7+ns8, "%.128"+c, "7us 8ns")
+	}
 
-	assertDuration_Format(t, us7, "%v", "go_pretty_print.Duration(7µs)")
 	assertDuration_Format(t, us7, "%d", "%!d(go_pretty_print.Duration=7µs)")
 
 	assertDuration_Format(t, -us7, "%b", "-8264141345021879p-70")
@@ -196,18 +200,19 @@ func TestDuration_Format_US(t *testing.T) {
 	assertDuration_Format(t, -us7, "%G", "-7E-06")
 	assertDuration_Format(t, -us7, "%.2G", "-7E-06")
 
-	assertDuration_Format(t, -us7, "%s", "-7us")
-	assertDuration_Format(t, -us7, "%.0s", "-7us")
-	assertDuration_Format(t, -us7, "%.7s", "-7us")
-	assertDuration_Format(t, -us7, "%.128s", "-7us")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -us7, "%"+c, "-7us")
+		assertDuration_Format(t, -us7, "%.0"+c, "-7us")
+		assertDuration_Format(t, -us7, "%.7"+c, "-7us")
+		assertDuration_Format(t, -us7, "%.128"+c, "-7us")
 
-	assertDuration_Format(t, -us7-ns8, "%s", "-7us 8ns")
-	assertDuration_Format(t, -us7-ns8, "%.0s", "-7us")
-	assertDuration_Format(t, -us7-ns8, "%.1s", "-7us 8ns")
-	assertDuration_Format(t, -us7-ns8, "%.7s", "-7us 8ns")
-	assertDuration_Format(t, -us7-ns8, "%.128s", "-7us 8ns")
+		assertDuration_Format(t, -us7-ns8, "%"+c, "-7us 8ns")
+		assertDuration_Format(t, -us7-ns8, "%.0"+c, "-7us")
+		assertDuration_Format(t, -us7-ns8, "%.1"+c, "-7us 8ns")
+		assertDuration_Format(t, -us7-ns8, "%.7"+c, "-7us 8ns")
+		assertDuration_Format(t, -us7-ns8, "%.128"+c, "-7us 8ns")
+	}
 
-	assertDuration_Format(t, -us7, "%v", "go_pretty_print.Duration(-7µs)")
 	assertDuration_Format(t, -us7, "%d", "%!d(go_pretty_print.Duration=-7µs)")
 }
 
@@ -225,31 +230,32 @@ func TestDuration_Format_MS(t *testing.T) {
 	assertDuration_Format(t, ms6, "%G", "0.006")
 	assertDuration_Format(t, ms6, "%.2G", "0.006")
 
-	assertDuration_Format(t, ms6, "%s", "6ms")
-	assertDuration_Format(t, ms6, "%.0s", "6ms")
-	assertDuration_Format(t, ms6, "%.7s", "6ms")
-	assertDuration_Format(t, ms6, "%.128s", "6ms")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, ms6, "%"+c, "6ms")
+		assertDuration_Format(t, ms6, "%.0"+c, "6ms")
+		assertDuration_Format(t, ms6, "%.7"+c, "6ms")
+		assertDuration_Format(t, ms6, "%.128"+c, "6ms")
 
-	assertDuration_Format(t, ms6+us7, "%s", "6ms 7us")
-	assertDuration_Format(t, ms6+us7, "%.0s", "6ms")
-	assertDuration_Format(t, ms6+us7, "%.1s", "6ms 7us")
-	assertDuration_Format(t, ms6+us7, "%.7s", "6ms 7us")
-	assertDuration_Format(t, ms6+us7, "%.128s", "6ms 7us")
+		assertDuration_Format(t, ms6+us7, "%"+c, "6ms 7us")
+		assertDuration_Format(t, ms6+us7, "%.0"+c, "6ms")
+		assertDuration_Format(t, ms6+us7, "%.1"+c, "6ms 7us")
+		assertDuration_Format(t, ms6+us7, "%.7"+c, "6ms 7us")
+		assertDuration_Format(t, ms6+us7, "%.128"+c, "6ms 7us")
 
-	assertDuration_Format(t, ms6+ns8, "%s", "6ms 8ns")
-	assertDuration_Format(t, ms6+ns8, "%.0s", "6ms")
-	assertDuration_Format(t, ms6+ns8, "%.1s", "6ms 8ns")
-	assertDuration_Format(t, ms6+ns8, "%.7s", "6ms 8ns")
-	assertDuration_Format(t, ms6+ns8, "%.128s", "6ms 8ns")
+		assertDuration_Format(t, ms6+ns8, "%"+c, "6ms 8ns")
+		assertDuration_Format(t, ms6+ns8, "%.0"+c, "6ms")
+		assertDuration_Format(t, ms6+ns8, "%.1"+c, "6ms 8ns")
+		assertDuration_Format(t, ms6+ns8, "%.7"+c, "6ms 8ns")
+		assertDuration_Format(t, ms6+ns8, "%.128"+c, "6ms 8ns")
 
-	assertDuration_Format(t, ms6+us7+ns8, "%s", "6ms 7us")
-	assertDuration_Format(t, ms6+us7+ns8, "%.0s", "6ms")
-	assertDuration_Format(t, ms6+us7+ns8, "%.1s", "6ms 7us")
-	assertDuration_Format(t, ms6+us7+ns8, "%.2s", "6ms 7us 8ns")
-	assertDuration_Format(t, ms6+us7+ns8, "%.7s", "6ms 7us 8ns")
-	assertDuration_Format(t, ms6+us7+ns8, "%.128s", "6ms 7us 8ns")
+		assertDuration_Format(t, ms6+us7+ns8, "%"+c, "6ms 7us")
+		assertDuration_Format(t, ms6+us7+ns8, "%.0"+c, "6ms")
+		assertDuration_Format(t, ms6+us7+ns8, "%.1"+c, "6ms 7us")
+		assertDuration_Format(t, ms6+us7+ns8, "%.2"+c, "6ms 7us 8ns")
+		assertDuration_Format(t, ms6+us7+ns8, "%.7"+c, "6ms 7us 8ns")
+		assertDuration_Format(t, ms6+us7+ns8, "%.128"+c, "6ms 7us 8ns")
+	}
 
-	assertDuration_Format(t, ms6, "%v", "go_pretty_print.Duration(6ms)")
 	assertDuration_Format(t, ms6, "%d", "%!d(go_pretty_print.Duration=6ms)")
 
 	assertDuration_Format(t, -ms6, "%b", "-6917529027641082p-60")
@@ -265,31 +271,32 @@ func TestDuration_Format_MS(t *testing.T) {
 	assertDuration_Format(t, -ms6, "%G", "-0.006")
 	assertDuration_Format(t, -ms6, "%.2G", "-0.006")
 
-	assertDuration_Format(t, -ms6, "%s", "-6ms")
-	assertDuration_Format(t, -ms6, "%.0s", "-6ms")
-	assertDuration_Format(t, -ms6, "%.7s", "-6ms")
-	assertDuration_Format(t, -ms6, "%.128s", "-6ms")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -ms6, "%"+c, "-6ms")
+		assertDuration_Format(t, -ms6, "%.0"+c, "-6ms")
+		assertDuration_Format(t, -ms6, "%.7"+c, "-6ms")
+		assertDuration_Format(t, -ms6, "%.128"+c, "-6ms")
 
-	assertDuration_Format(t, -ms6-us7, "%s", "-6ms 7us")
-	assertDuration_Format(t, -ms6-us7, "%.0s", "-6ms")
-	assertDuration_Format(t, -ms6-us7, "%.1s", "-6ms 7us")
-	assertDuration_Format(t, -ms6-us7, "%.7s", "-6ms 7us")
-	assertDuration_Format(t, -ms6-us7, "%.128s", "-6ms 7us")
+		assertDuration_Format(t, -ms6-us7, "%"+c, "-6ms 7us")
+		assertDuration_Format(t, -ms6-us7, "%.0"+c, "-6ms")
+		assertDuration_Format(t, -ms6-us7, "%.1"+c, "-6ms 7us")
+		assertDuration_Format(t, -ms6-us7, "%.7"+c, "-6ms 7us")
+		assertDuration_Format(t, -ms6-us7, "%.128"+c, "-6ms 7us")
 
-	assertDuration_Format(t, -ms6-ns8, "%s", "-6ms 8ns")
-	assertDuration_Format(t, -ms6-ns8, "%.0s", "-6ms")
-	assertDuration_Format(t, -ms6-ns8, "%.1s", "-6ms 8ns")
-	assertDuration_Format(t, -ms6-ns8, "%.7s", "-6ms 8ns")
-	assertDuration_Format(t, -ms6-ns8, "%.128s", "-6ms 8ns")
+		assertDuration_Format(t, -ms6-ns8, "%"+c, "-6ms 8ns")
+		assertDuration_Format(t, -ms6-ns8, "%.0"+c, "-6ms")
+		assertDuration_Format(t, -ms6-ns8, "%.1"+c, "-6ms 8ns")
+		assertDuration_Format(t, -ms6-ns8, "%.7"+c, "-6ms 8ns")
+		assertDuration_Format(t, -ms6-ns8, "%.128"+c, "-6ms 8ns")
 
-	assertDuration_Format(t, -ms6-us7-ns8, "%s", "-6ms 7us")
-	assertDuration_Format(t, -ms6-us7-ns8, "%.0s", "-6ms")
-	assertDuration_Format(t, -ms6-us7-ns8, "%.1s", "-6ms 7us")
-	assertDuration_Format(t, -ms6-us7-ns8, "%.2s", "-6ms 7us 8ns")
-	assertDuration_Format(t, -ms6-us7-ns8, "%.7s", "-6ms 7us 8ns")
-	assertDuration_Format(t, -ms6-us7-ns8, "%.128s", "-6ms 7us 8ns")
+		assertDuration_Format(t, -ms6-us7-ns8, "%"+c, "-6ms 7us")
+		assertDuration_Format(t, -ms6-us7-ns8, "%.0"+c, "-6ms")
+		assertDuration_Format(t, -ms6-us7-ns8, "%.1"+c, "-6ms 7us")
+		assertDuration_Format(t, -ms6-us7-ns8, "%.2"+c, "-6ms 7us 8ns")
+		assertDuration_Format(t, -ms6-us7-ns8, "%.7"+c, "-6ms 7us 8ns")
+		assertDuration_Format(t, -ms6-us7-ns8, "%.128"+c, "-6ms 7us 8ns")
+	}
 
-	assertDuration_Format(t, -ms6, "%v", "go_pretty_print.Duration(-6ms)")
 	assertDuration_Format(t, -ms6, "%d", "%!d(go_pretty_print.Duration=-6ms)")
 }
 
@@ -307,24 +314,25 @@ func TestDuration_Format_S(t *testing.T) {
 	assertDuration_Format(t, s5, "%G", "5")
 	assertDuration_Format(t, s5, "%.2G", "5")
 
-	assertDuration_Format(t, s5, "%s", "5s")
-	assertDuration_Format(t, s5, "%.0s", "5s")
-	assertDuration_Format(t, s5, "%.7s", "5s")
-	assertDuration_Format(t, s5, "%.128s", "5s")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, s5, "%"+c, "5s")
+		assertDuration_Format(t, s5, "%.0"+c, "5s")
+		assertDuration_Format(t, s5, "%.7"+c, "5s")
+		assertDuration_Format(t, s5, "%.128"+c, "5s")
 
-	assertDuration_Format(t, s5+ms6, "%s", "5s 6ms")
-	assertDuration_Format(t, s5+ms6, "%.0s", "5s")
-	assertDuration_Format(t, s5+ms6, "%.1s", "5s 6ms")
-	assertDuration_Format(t, s5+ms6, "%.7s", "5s 6ms")
-	assertDuration_Format(t, s5+ms6, "%.128s", "5s 6ms")
+		assertDuration_Format(t, s5+ms6, "%"+c, "5s 6ms")
+		assertDuration_Format(t, s5+ms6, "%.0"+c, "5s")
+		assertDuration_Format(t, s5+ms6, "%.1"+c, "5s 6ms")
+		assertDuration_Format(t, s5+ms6, "%.7"+c, "5s 6ms")
+		assertDuration_Format(t, s5+ms6, "%.128"+c, "5s 6ms")
 
-	assertDuration_Format(t, s5+ns8, "%s", "5s 8ns")
-	assertDuration_Format(t, s5+ns8, "%.0s", "5s")
-	assertDuration_Format(t, s5+ns8, "%.1s", "5s 8ns")
-	assertDuration_Format(t, s5+ns8, "%.7s", "5s 8ns")
-	assertDuration_Format(t, s5+ns8, "%.128s", "5s 8ns")
+		assertDuration_Format(t, s5+ns8, "%"+c, "5s 8ns")
+		assertDuration_Format(t, s5+ns8, "%.0"+c, "5s")
+		assertDuration_Format(t, s5+ns8, "%.1"+c, "5s 8ns")
+		assertDuration_Format(t, s5+ns8, "%.7"+c, "5s 8ns")
+		assertDuration_Format(t, s5+ns8, "%.128"+c, "5s 8ns")
+	}
 
-	assertDuration_Format(t, s5, "%v", "go_pretty_print.Duration(5s)")
 	assertDuration_Format(t, s5, "%d", "%!d(go_pretty_print.Duration=5s)")
 
 	assertDuration_Format(t, -s5, "%b", "-5629499534213120p-50")
@@ -340,24 +348,25 @@ func TestDuration_Format_S(t *testing.T) {
 	assertDuration_Format(t, -s5, "%G", "-5")
 	assertDuration_Format(t, -s5, "%.2G", "-5")
 
-	assertDuration_Format(t, -s5, "%s", "-5s")
-	assertDuration_Format(t, -s5, "%.0s", "-5s")
-	assertDuration_Format(t, -s5, "%.7s", "-5s")
-	assertDuration_Format(t, -s5, "%.128s", "-5s")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -s5, "%"+c, "-5s")
+		assertDuration_Format(t, -s5, "%.0"+c, "-5s")
+		assertDuration_Format(t, -s5, "%.7"+c, "-5s")
+		assertDuration_Format(t, -s5, "%.128"+c, "-5s")
 
-	assertDuration_Format(t, -s5-ms6, "%s", "-5s 6ms")
-	assertDuration_Format(t, -s5-ms6, "%.0s", "-5s")
-	assertDuration_Format(t, -s5-ms6, "%.1s", "-5s 6ms")
-	assertDuration_Format(t, -s5-ms6, "%.7s", "-5s 6ms")
-	assertDuration_Format(t, -s5-ms6, "%.128s", "-5s 6ms")
+		assertDuration_Format(t, -s5-ms6, "%"+c, "-5s 6ms")
+		assertDuration_Format(t, -s5-ms6, "%.0"+c, "-5s")
+		assertDuration_Format(t, -s5-ms6, "%.1"+c, "-5s 6ms")
+		assertDuration_Format(t, -s5-ms6, "%.7"+c, "-5s 6ms")
+		assertDuration_Format(t, -s5-ms6, "%.128"+c, "-5s 6ms")
 
-	assertDuration_Format(t, -s5-ns8, "%s", "-5s 8ns")
-	assertDuration_Format(t, -s5-ns8, "%.0s", "-5s")
-	assertDuration_Format(t, -s5-ns8, "%.1s", "-5s 8ns")
-	assertDuration_Format(t, -s5-ns8, "%.7s", "-5s 8ns")
-	assertDuration_Format(t, -s5-ns8, "%.128s", "-5s 8ns")
+		assertDuration_Format(t, -s5-ns8, "%"+c, "-5s 8ns")
+		assertDuration_Format(t, -s5-ns8, "%.0"+c, "-5s")
+		assertDuration_Format(t, -s5-ns8, "%.1"+c, "-5s 8ns")
+		assertDuration_Format(t, -s5-ns8, "%.7"+c, "-5s 8ns")
+		assertDuration_Format(t, -s5-ns8, "%.128"+c, "-5s 8ns")
+	}
 
-	assertDuration_Format(t, -s5, "%v", "go_pretty_print.Duration(-5s)")
 	assertDuration_Format(t, -s5, "%d", "%!d(go_pretty_print.Duration=-5s)")
 }
 
@@ -375,24 +384,25 @@ func TestDuration_Format_M(t *testing.T) {
 	assertDuration_Format(t, m4, "%G", "240")
 	assertDuration_Format(t, m4, "%.2G", "2.4E+02")
 
-	assertDuration_Format(t, m4, "%s", "4m")
-	assertDuration_Format(t, m4, "%.0s", "4m")
-	assertDuration_Format(t, m4, "%.7s", "4m")
-	assertDuration_Format(t, m4, "%.128s", "4m")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, m4, "%"+c, "4m")
+		assertDuration_Format(t, m4, "%.0"+c, "4m")
+		assertDuration_Format(t, m4, "%.7"+c, "4m")
+		assertDuration_Format(t, m4, "%.128"+c, "4m")
 
-	assertDuration_Format(t, m4+s5, "%s", "4m 5s")
-	assertDuration_Format(t, m4+s5, "%.0s", "4m")
-	assertDuration_Format(t, m4+s5, "%.1s", "4m 5s")
-	assertDuration_Format(t, m4+s5, "%.7s", "4m 5s")
-	assertDuration_Format(t, m4+s5, "%.128s", "4m 5s")
+		assertDuration_Format(t, m4+s5, "%"+c, "4m 5s")
+		assertDuration_Format(t, m4+s5, "%.0"+c, "4m")
+		assertDuration_Format(t, m4+s5, "%.1"+c, "4m 5s")
+		assertDuration_Format(t, m4+s5, "%.7"+c, "4m 5s")
+		assertDuration_Format(t, m4+s5, "%.128"+c, "4m 5s")
 
-	assertDuration_Format(t, m4+ns8, "%s", "4m 8ns")
-	assertDuration_Format(t, m4+ns8, "%.0s", "4m")
-	assertDuration_Format(t, m4+ns8, "%.1s", "4m 8ns")
-	assertDuration_Format(t, m4+ns8, "%.7s", "4m 8ns")
-	assertDuration_Format(t, m4+ns8, "%.128s", "4m 8ns")
+		assertDuration_Format(t, m4+ns8, "%"+c, "4m 8ns")
+		assertDuration_Format(t, m4+ns8, "%.0"+c, "4m")
+		assertDuration_Format(t, m4+ns8, "%.1"+c, "4m 8ns")
+		assertDuration_Format(t, m4+ns8, "%.7"+c, "4m 8ns")
+		assertDuration_Format(t, m4+ns8, "%.128"+c, "4m 8ns")
+	}
 
-	assertDuration_Format(t, m4, "%v", "go_pretty_print.Duration(4m0s)")
 	assertDuration_Format(t, m4, "%d", "%!d(go_pretty_print.Duration=4m0s)")
 
 	assertDuration_Format(t, -m4, "%b", "-8444249301319680p-45")
@@ -408,24 +418,25 @@ func TestDuration_Format_M(t *testing.T) {
 	assertDuration_Format(t, -m4, "%G", "-240")
 	assertDuration_Format(t, -m4, "%.2G", "-2.4E+02")
 
-	assertDuration_Format(t, -m4, "%s", "-4m")
-	assertDuration_Format(t, -m4, "%.0s", "-4m")
-	assertDuration_Format(t, -m4, "%.7s", "-4m")
-	assertDuration_Format(t, -m4, "%.128s", "-4m")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -m4, "%"+c, "-4m")
+		assertDuration_Format(t, -m4, "%.0"+c, "-4m")
+		assertDuration_Format(t, -m4, "%.7"+c, "-4m")
+		assertDuration_Format(t, -m4, "%.128"+c, "-4m")
 
-	assertDuration_Format(t, -m4-s5, "%s", "-4m 5s")
-	assertDuration_Format(t, -m4-s5, "%.0s", "-4m")
-	assertDuration_Format(t, -m4-s5, "%.1s", "-4m 5s")
-	assertDuration_Format(t, -m4-s5, "%.7s", "-4m 5s")
-	assertDuration_Format(t, -m4-s5, "%.128s", "-4m 5s")
+		assertDuration_Format(t, -m4-s5, "%"+c, "-4m 5s")
+		assertDuration_Format(t, -m4-s5, "%.0"+c, "-4m")
+		assertDuration_Format(t, -m4-s5, "%.1"+c, "-4m 5s")
+		assertDuration_Format(t, -m4-s5, "%.7"+c, "-4m 5s")
+		assertDuration_Format(t, -m4-s5, "%.128"+c, "-4m 5s")
 
-	assertDuration_Format(t, -m4-ns8, "%s", "-4m 8ns")
-	assertDuration_Format(t, -m4-ns8, "%.0s", "-4m")
-	assertDuration_Format(t, -m4-ns8, "%.1s", "-4m 8ns")
-	assertDuration_Format(t, -m4-ns8, "%.7s", "-4m 8ns")
-	assertDuration_Format(t, -m4-ns8, "%.128s", "-4m 8ns")
+		assertDuration_Format(t, -m4-ns8, "%"+c, "-4m 8ns")
+		assertDuration_Format(t, -m4-ns8, "%.0"+c, "-4m")
+		assertDuration_Format(t, -m4-ns8, "%.1"+c, "-4m 8ns")
+		assertDuration_Format(t, -m4-ns8, "%.7"+c, "-4m 8ns")
+		assertDuration_Format(t, -m4-ns8, "%.128"+c, "-4m 8ns")
+	}
 
-	assertDuration_Format(t, -m4, "%v", "go_pretty_print.Duration(-4m0s)")
 	assertDuration_Format(t, -m4, "%d", "%!d(go_pretty_print.Duration=-4m0s)")
 }
 
@@ -443,24 +454,25 @@ func TestDuration_Format_H(t *testing.T) {
 	assertDuration_Format(t, h3, "%G", "10800")
 	assertDuration_Format(t, h3, "%.2G", "1.1E+04")
 
-	assertDuration_Format(t, h3, "%s", "3h")
-	assertDuration_Format(t, h3, "%.0s", "3h")
-	assertDuration_Format(t, h3, "%.7s", "3h")
-	assertDuration_Format(t, h3, "%.128s", "3h")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, h3, "%"+c, "3h")
+		assertDuration_Format(t, h3, "%.0"+c, "3h")
+		assertDuration_Format(t, h3, "%.7"+c, "3h")
+		assertDuration_Format(t, h3, "%.128"+c, "3h")
 
-	assertDuration_Format(t, h3+m4, "%s", "3h 4m")
-	assertDuration_Format(t, h3+m4, "%.0s", "3h")
-	assertDuration_Format(t, h3+m4, "%.1s", "3h 4m")
-	assertDuration_Format(t, h3+m4, "%.7s", "3h 4m")
-	assertDuration_Format(t, h3+m4, "%.128s", "3h 4m")
+		assertDuration_Format(t, h3+m4, "%"+c, "3h 4m")
+		assertDuration_Format(t, h3+m4, "%.0"+c, "3h")
+		assertDuration_Format(t, h3+m4, "%.1"+c, "3h 4m")
+		assertDuration_Format(t, h3+m4, "%.7"+c, "3h 4m")
+		assertDuration_Format(t, h3+m4, "%.128"+c, "3h 4m")
 
-	assertDuration_Format(t, h3+ns8, "%s", "3h 8ns")
-	assertDuration_Format(t, h3+ns8, "%.0s", "3h")
-	assertDuration_Format(t, h3+ns8, "%.1s", "3h 8ns")
-	assertDuration_Format(t, h3+ns8, "%.7s", "3h 8ns")
-	assertDuration_Format(t, h3+ns8, "%.128s", "3h 8ns")
+		assertDuration_Format(t, h3+ns8, "%"+c, "3h 8ns")
+		assertDuration_Format(t, h3+ns8, "%.0"+c, "3h")
+		assertDuration_Format(t, h3+ns8, "%.1"+c, "3h 8ns")
+		assertDuration_Format(t, h3+ns8, "%.7"+c, "3h 8ns")
+		assertDuration_Format(t, h3+ns8, "%.128"+c, "3h 8ns")
+	}
 
-	assertDuration_Format(t, h3, "%v", "go_pretty_print.Duration(3h0m0s)")
 	assertDuration_Format(t, h3, "%d", "%!d(go_pretty_print.Duration=3h0m0s)")
 
 	assertDuration_Format(t, -h3, "%b", "-5937362789990400p-39")
@@ -476,24 +488,25 @@ func TestDuration_Format_H(t *testing.T) {
 	assertDuration_Format(t, -h3, "%G", "-10800")
 	assertDuration_Format(t, -h3, "%.2G", "-1.1E+04")
 
-	assertDuration_Format(t, -h3, "%s", "-3h")
-	assertDuration_Format(t, -h3, "%.0s", "-3h")
-	assertDuration_Format(t, -h3, "%.7s", "-3h")
-	assertDuration_Format(t, -h3, "%.128s", "-3h")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -h3, "%"+c, "-3h")
+		assertDuration_Format(t, -h3, "%.0"+c, "-3h")
+		assertDuration_Format(t, -h3, "%.7"+c, "-3h")
+		assertDuration_Format(t, -h3, "%.128"+c, "-3h")
 
-	assertDuration_Format(t, -h3-m4, "%s", "-3h 4m")
-	assertDuration_Format(t, -h3-m4, "%.0s", "-3h")
-	assertDuration_Format(t, -h3-m4, "%.1s", "-3h 4m")
-	assertDuration_Format(t, -h3-m4, "%.7s", "-3h 4m")
-	assertDuration_Format(t, -h3-m4, "%.128s", "-3h 4m")
+		assertDuration_Format(t, -h3-m4, "%"+c, "-3h 4m")
+		assertDuration_Format(t, -h3-m4, "%.0"+c, "-3h")
+		assertDuration_Format(t, -h3-m4, "%.1"+c, "-3h 4m")
+		assertDuration_Format(t, -h3-m4, "%.7"+c, "-3h 4m")
+		assertDuration_Format(t, -h3-m4, "%.128"+c, "-3h 4m")
 
-	assertDuration_Format(t, -h3-ns8, "%s", "-3h 8ns")
-	assertDuration_Format(t, -h3-ns8, "%.0s", "-3h")
-	assertDuration_Format(t, -h3-ns8, "%.1s", "-3h 8ns")
-	assertDuration_Format(t, -h3-ns8, "%.7s", "-3h 8ns")
-	assertDuration_Format(t, -h3-ns8, "%.128s", "-3h 8ns")
+		assertDuration_Format(t, -h3-ns8, "%"+c, "-3h 8ns")
+		assertDuration_Format(t, -h3-ns8, "%.0"+c, "-3h")
+		assertDuration_Format(t, -h3-ns8, "%.1"+c, "-3h 8ns")
+		assertDuration_Format(t, -h3-ns8, "%.7"+c, "-3h 8ns")
+		assertDuration_Format(t, -h3-ns8, "%.128"+c, "-3h 8ns")
+	}
 
-	assertDuration_Format(t, -h3, "%v", "go_pretty_print.Duration(-3h0m0s)")
 	assertDuration_Format(t, -h3, "%d", "%!d(go_pretty_print.Duration=-3h0m0s)")
 }
 
@@ -511,24 +524,25 @@ func TestDuration_Format_D(t *testing.T) {
 	assertDuration_Format(t, d2, "%G", "172800")
 	assertDuration_Format(t, d2, "%.2G", "1.7E+05")
 
-	assertDuration_Format(t, d2, "%s", "2d")
-	assertDuration_Format(t, d2, "%.0s", "2d")
-	assertDuration_Format(t, d2, "%.7s", "2d")
-	assertDuration_Format(t, d2, "%.128s", "2d")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, d2, "%"+c, "2d")
+		assertDuration_Format(t, d2, "%.0"+c, "2d")
+		assertDuration_Format(t, d2, "%.7"+c, "2d")
+		assertDuration_Format(t, d2, "%.128"+c, "2d")
 
-	assertDuration_Format(t, d2+h3, "%s", "2d 3h")
-	assertDuration_Format(t, d2+h3, "%.0s", "2d")
-	assertDuration_Format(t, d2+h3, "%.1s", "2d 3h")
-	assertDuration_Format(t, d2+h3, "%.7s", "2d 3h")
-	assertDuration_Format(t, d2+h3, "%.128s", "2d 3h")
+		assertDuration_Format(t, d2+h3, "%"+c, "2d 3h")
+		assertDuration_Format(t, d2+h3, "%.0"+c, "2d")
+		assertDuration_Format(t, d2+h3, "%.1"+c, "2d 3h")
+		assertDuration_Format(t, d2+h3, "%.7"+c, "2d 3h")
+		assertDuration_Format(t, d2+h3, "%.128"+c, "2d 3h")
 
-	assertDuration_Format(t, d2+ns8, "%s", "2d 8ns")
-	assertDuration_Format(t, d2+ns8, "%.0s", "2d")
-	assertDuration_Format(t, d2+ns8, "%.1s", "2d 8ns")
-	assertDuration_Format(t, d2+ns8, "%.7s", "2d 8ns")
-	assertDuration_Format(t, d2+ns8, "%.128s", "2d 8ns")
+		assertDuration_Format(t, d2+ns8, "%"+c, "2d 8ns")
+		assertDuration_Format(t, d2+ns8, "%.0"+c, "2d")
+		assertDuration_Format(t, d2+ns8, "%.1"+c, "2d 8ns")
+		assertDuration_Format(t, d2+ns8, "%.7"+c, "2d 8ns")
+		assertDuration_Format(t, d2+ns8, "%.128"+c, "2d 8ns")
+	}
 
-	assertDuration_Format(t, d2, "%v", "go_pretty_print.Duration(48h0m0s)")
 	assertDuration_Format(t, d2, "%d", "%!d(go_pretty_print.Duration=48h0m0s)")
 
 	assertDuration_Format(t, -d2, "%b", "-5937362789990400p-35")
@@ -544,24 +558,25 @@ func TestDuration_Format_D(t *testing.T) {
 	assertDuration_Format(t, -d2, "%G", "-172800")
 	assertDuration_Format(t, -d2, "%.2G", "-1.7E+05")
 
-	assertDuration_Format(t, -d2, "%s", "-2d")
-	assertDuration_Format(t, -d2, "%.0s", "-2d")
-	assertDuration_Format(t, -d2, "%.7s", "-2d")
-	assertDuration_Format(t, -d2, "%.128s", "-2d")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -d2, "%"+c, "-2d")
+		assertDuration_Format(t, -d2, "%.0"+c, "-2d")
+		assertDuration_Format(t, -d2, "%.7"+c, "-2d")
+		assertDuration_Format(t, -d2, "%.128"+c, "-2d")
 
-	assertDuration_Format(t, -d2-h3, "%s", "-2d 3h")
-	assertDuration_Format(t, -d2-h3, "%.0s", "-2d")
-	assertDuration_Format(t, -d2-h3, "%.1s", "-2d 3h")
-	assertDuration_Format(t, -d2-h3, "%.7s", "-2d 3h")
-	assertDuration_Format(t, -d2-h3, "%.128s", "-2d 3h")
+		assertDuration_Format(t, -d2-h3, "%"+c, "-2d 3h")
+		assertDuration_Format(t, -d2-h3, "%.0"+c, "-2d")
+		assertDuration_Format(t, -d2-h3, "%.1"+c, "-2d 3h")
+		assertDuration_Format(t, -d2-h3, "%.7"+c, "-2d 3h")
+		assertDuration_Format(t, -d2-h3, "%.128"+c, "-2d 3h")
 
-	assertDuration_Format(t, -d2-ns8, "%s", "-2d 8ns")
-	assertDuration_Format(t, -d2-ns8, "%.0s", "-2d")
-	assertDuration_Format(t, -d2-ns8, "%.1s", "-2d 8ns")
-	assertDuration_Format(t, -d2-ns8, "%.7s", "-2d 8ns")
-	assertDuration_Format(t, -d2-ns8, "%.128s", "-2d 8ns")
+		assertDuration_Format(t, -d2-ns8, "%"+c, "-2d 8ns")
+		assertDuration_Format(t, -d2-ns8, "%.0"+c, "-2d")
+		assertDuration_Format(t, -d2-ns8, "%.1"+c, "-2d 8ns")
+		assertDuration_Format(t, -d2-ns8, "%.7"+c, "-2d 8ns")
+		assertDuration_Format(t, -d2-ns8, "%.128"+c, "-2d 8ns")
+	}
 
-	assertDuration_Format(t, -d2, "%v", "go_pretty_print.Duration(-48h0m0s)")
 	assertDuration_Format(t, -d2, "%d", "%!d(go_pretty_print.Duration=-48h0m0s)")
 }
 
@@ -579,24 +594,25 @@ func TestDuration_Format_W(t *testing.T) {
 	assertDuration_Format(t, w1, "%G", "604800")
 	assertDuration_Format(t, w1, "%.2G", "6E+05")
 
-	assertDuration_Format(t, w1, "%s", "1w")
-	assertDuration_Format(t, w1, "%.0s", "1w")
-	assertDuration_Format(t, w1, "%.7s", "1w")
-	assertDuration_Format(t, w1, "%.128s", "1w")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, w1, "%"+c, "1w")
+		assertDuration_Format(t, w1, "%.0"+c, "1w")
+		assertDuration_Format(t, w1, "%.7"+c, "1w")
+		assertDuration_Format(t, w1, "%.128"+c, "1w")
 
-	assertDuration_Format(t, w1+d2, "%s", "1w 2d")
-	assertDuration_Format(t, w1+d2, "%.0s", "1w")
-	assertDuration_Format(t, w1+d2, "%.1s", "1w 2d")
-	assertDuration_Format(t, w1+d2, "%.7s", "1w 2d")
-	assertDuration_Format(t, w1+d2, "%.128s", "1w 2d")
+		assertDuration_Format(t, w1+d2, "%"+c, "1w 2d")
+		assertDuration_Format(t, w1+d2, "%.0"+c, "1w")
+		assertDuration_Format(t, w1+d2, "%.1"+c, "1w 2d")
+		assertDuration_Format(t, w1+d2, "%.7"+c, "1w 2d")
+		assertDuration_Format(t, w1+d2, "%.128"+c, "1w 2d")
 
-	assertDuration_Format(t, w1+ns8, "%s", "1w 8ns")
-	assertDuration_Format(t, w1+ns8, "%.0s", "1w")
-	assertDuration_Format(t, w1+ns8, "%.1s", "1w 8ns")
-	assertDuration_Format(t, w1+ns8, "%.7s", "1w 8ns")
-	assertDuration_Format(t, w1+ns8, "%.128s", "1w 8ns")
+		assertDuration_Format(t, w1+ns8, "%"+c, "1w 8ns")
+		assertDuration_Format(t, w1+ns8, "%.0"+c, "1w")
+		assertDuration_Format(t, w1+ns8, "%.1"+c, "1w 8ns")
+		assertDuration_Format(t, w1+ns8, "%.7"+c, "1w 8ns")
+		assertDuration_Format(t, w1+ns8, "%.128"+c, "1w 8ns")
+	}
 
-	assertDuration_Format(t, w1, "%v", "go_pretty_print.Duration(168h0m0s)")
 	assertDuration_Format(t, w1, "%d", "%!d(go_pretty_print.Duration=168h0m0s)")
 
 	assertDuration_Format(t, -w1, "%b", "-5195192441241600p-33")
@@ -612,24 +628,25 @@ func TestDuration_Format_W(t *testing.T) {
 	assertDuration_Format(t, -w1, "%G", "-604800")
 	assertDuration_Format(t, -w1, "%.2G", "-6E+05")
 
-	assertDuration_Format(t, -w1, "%s", "-1w")
-	assertDuration_Format(t, -w1, "%.0s", "-1w")
-	assertDuration_Format(t, -w1, "%.7s", "-1w")
-	assertDuration_Format(t, -w1, "%.128s", "-1w")
+	for _, c := range [2]string{"s", "v"} {
+		assertDuration_Format(t, -w1, "%"+c, "-1w")
+		assertDuration_Format(t, -w1, "%.0"+c, "-1w")
+		assertDuration_Format(t, -w1, "%.7"+c, "-1w")
+		assertDuration_Format(t, -w1, "%.128"+c, "-1w")
 
-	assertDuration_Format(t, -w1-d2, "%s", "-1w 2d")
-	assertDuration_Format(t, -w1-d2, "%.0s", "-1w")
-	assertDuration_Format(t, -w1-d2, "%.1s", "-1w 2d")
-	assertDuration_Format(t, -w1-d2, "%.7s", "-1w 2d")
-	assertDuration_Format(t, -w1-d2, "%.128s", "-1w 2d")
+		assertDuration_Format(t, -w1-d2, "%"+c, "-1w 2d")
+		assertDuration_Format(t, -w1-d2, "%.0"+c, "-1w")
+		assertDuration_Format(t, -w1-d2, "%.1"+c, "-1w 2d")
+		assertDuration_Format(t, -w1-d2, "%.7"+c, "-1w 2d")
+		assertDuration_Format(t, -w1-d2, "%.128"+c, "-1w 2d")
 
-	assertDuration_Format(t, -w1-ns8, "%s", "-1w 8ns")
-	assertDuration_Format(t, -w1-ns8, "%.0s", "-1w")
-	assertDuration_Format(t, -w1-ns8, "%.1s", "-1w 8ns")
-	assertDuration_Format(t, -w1-ns8, "%.7s", "-1w 8ns")
-	assertDuration_Format(t, -w1-ns8, "%.128s", "-1w 8ns")
+		assertDuration_Format(t, -w1-ns8, "%"+c, "-1w 8ns")
+		assertDuration_Format(t, -w1-ns8, "%.0"+c, "-1w")
+		assertDuration_Format(t, -w1-ns8, "%.1"+c, "-1w 8ns")
+		assertDuration_Format(t, -w1-ns8, "%.7"+c, "-1w 8ns")
+		assertDuration_Format(t, -w1-ns8, "%.128"+c, "-1w 8ns")
+	}
 
-	assertDuration_Format(t, -w1, "%v", "go_pretty_print.Duration(-168h0m0s)")
 	assertDuration_Format(t, -w1, "%d", "%!d(go_pretty_print.Duration=-168h0m0s)")
 }
 
