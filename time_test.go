@@ -1,15 +1,14 @@
 package go_pretty_print
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
-	"reflect"
-	"strconv"
+	. "github.com/Al2Klimov/go-test-utils"
 	"testing"
 	"time"
 )
+
+type any = interface{}
 
 const ns8 = 8 * time.Nanosecond
 const us7 = 7 * time.Microsecond
@@ -46,13 +45,7 @@ func assertDuration_MarshalJSON(t *testing.T, d time.Duration, expected string) 
 	t.Helper()
 
 	jsn, err := json.Marshal(Duration(d))
-
-	assertCallResult(
-		t,
-		fmt.Sprintf("json.Marshal(Duration(%v))", d),
-		[]interface{}{[]byte(expected), nil},
-		[]interface{}{jsn, err},
-	)
+	AssertCallResult(t, "json.Marshal(Duration(%v))", []any{d}, []any{[]byte(expected), nil}, []any{jsn, err})
 }
 
 func TestDuration_String(t *testing.T) {
@@ -80,12 +73,7 @@ func TestDuration_String(t *testing.T) {
 func assertDuration_String(t *testing.T, d time.Duration, expected string) {
 	t.Helper()
 
-	assertCallResult(
-		t,
-		fmt.Sprintf("Duration(%v).String()", d),
-		[]interface{}{expected},
-		[]interface{}{Duration(d).String()},
-	)
+	AssertCallResult(t, "Duration(%v).String()", []any{d}, []any{expected}, []any{Duration(d).String()})
 }
 
 func TestDuration_Format_0(t *testing.T) {
@@ -653,71 +641,11 @@ func TestDuration_Format_W(t *testing.T) {
 func assertDuration_Format(t *testing.T, d time.Duration, format, expected string) {
 	t.Helper()
 
-	assertCallResult(
+	AssertCallResult(
 		t,
-		fmt.Sprintf("fmt.Sprintf(%#v, Duration(%v))", format, d),
-		[]interface{}{expected},
-		[]interface{}{fmt.Sprintf(format, Duration(d))},
+		"fmt.Sprintf(%#v, Duration(%v))",
+		[]any{format, d},
+		[]any{expected},
+		[]any{fmt.Sprintf(format, Duration(d))},
 	)
-}
-
-func assertCallResult(t *testing.T, call string, expected, actual []interface{}) {
-	t.Helper()
-
-	if !reflect.DeepEqual(expected, actual) {
-		buf := &bytes.Buffer{}
-
-		fmt.Fprintf(buf, "Got unexpected result from %s:", call)
-
-		for _, e := range expected {
-			fmt.Fprint(buf, "\n- ")
-			fprintHumanReadable(buf, e)
-		}
-
-		for _, a := range actual {
-			fmt.Fprint(buf, "\n+ ")
-			fprintHumanReadable(buf, a)
-		}
-
-		t.Error(buf.String())
-	}
-}
-
-func fprintHumanReadable(w io.Writer, v interface{}) {
-	switch x := v.(type) {
-	case nil:
-		fmt.Fprint(w, "nil")
-	case bool:
-		fmt.Fprintf(w, "bool(%v)", x)
-	case int:
-		fmt.Fprintf(w, "int(%d)", x)
-	case int8:
-		fmt.Fprintf(w, "int8(%d)", x)
-	case int16:
-		fmt.Fprintf(w, "int16(%d)", x)
-	case int32:
-		fmt.Fprintf(w, "int32(%d)", x)
-	case int64:
-		fmt.Fprintf(w, "int64(%d)", x)
-	case uint:
-		fmt.Fprintf(w, "uint(%d)", x)
-	case uint8:
-		fmt.Fprintf(w, "uint8(%d)", x)
-	case uint16:
-		fmt.Fprintf(w, "uint16(%d)", x)
-	case uint32:
-		fmt.Fprintf(w, "uint32(%d)", x)
-	case uint64:
-		fmt.Fprintf(w, "uint64(%d)", x)
-	case float32:
-		fmt.Fprintf(w, "float32(%s)", strconv.FormatFloat(float64(x), 'g', -1, 64))
-	case float64:
-		fmt.Fprintf(w, "float64(%s)", strconv.FormatFloat(x, 'g', -1, 64))
-	case string:
-		fmt.Fprintf(w, "string(%#v)", x)
-	case []byte:
-		fmt.Fprintf(w, "[]byte(%#v)", string(x))
-	default:
-		fmt.Fprintf(w, "%#v", v)
-	}
 }
